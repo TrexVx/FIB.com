@@ -128,6 +128,29 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            if (users.some(u => u.username === username)) {
+                alert('El nombre de usuario ya está en uso');
+                return;
+            }
+
+            users.push({ username, password });
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            alert('Registro exitoso. Por favor, inicia sesión.');
+            window.location.href = 'login.html';
+        });
+    </script>
 </body>
 </html>

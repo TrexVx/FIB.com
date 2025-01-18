@@ -277,6 +277,7 @@ function toggleTheme() {
             }
         });
 
+        //form
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
         function updateUserInfo() {
@@ -284,14 +285,14 @@ function toggleTheme() {
             const postForm = document.getElementById('postForm');
             if (currentUser) {
                 userInfo.innerHTML = `
-                    Bienvenido, ${currentUser.username}!
+                    <h3>Bienvenido, ${currentUser.username}!</h3>
                     <button id="logoutButton">Cerrar Sesión</button>
                 `;
                 document.getElementById('logoutButton').addEventListener('click', logout);
                 postForm.style.display = 'block';
             } else {
                 userInfo.innerHTML = `
-                    <button id="loginButton">Iniciar Sesión</button>
+                    <button class="enviar" id="loginButton">Iniciar Sesión</button>
                 `;
                 document.getElementById('loginButton').addEventListener('click', () => {
                     window.location.href = 'login.html';
@@ -372,7 +373,8 @@ function toggleTheme() {
         updateUserInfo();
         loadPosts();
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+         //Login y register
+        /* document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -380,12 +382,12 @@ function toggleTheme() {
             const user = users.find(u => u.username === username && u.password === password);
             if (user) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                window.location.href = 'forum.html'; // Redirect to forum.html immediately after successful login
+                window.location.href = 'forum.html';
             } else {
                 alert('Usuario o contraseña incorrectos');
             }
         });
-
+        
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
@@ -407,4 +409,4 @@ function toggleTheme() {
             localStorage.setItem('forumUsers', JSON.stringify(users));
             alert('Registro exitoso. Por favor, inicia sesión.');
             window.location.href = 'login.html';
-        });
+        });*/

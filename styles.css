@@ -634,7 +634,7 @@ section.no-bg,
     z-index: 1001;
     top: 0;
     left: -250px;
-    background-color: #611232;
+    background-color: #002768;
     overflow-x: hidden;
     transition: 0.3s;
     padding-top: 45px;
@@ -669,7 +669,7 @@ section.no-bg,
 .openbtn {
     font-size: 20px;
     cursor: pointer;
-    background-color: #611232c4;
+    background-color: #002768;
     color: white;
     padding: 9px 13px;
     border: 1px solid #ffffffeb;
@@ -704,7 +704,7 @@ section.no-bg,
 }
 
 .dark-theme .sidebar {
-    background-color: #611232;
+    background-color: #002768;
 }
 
 .dark-theme .sidebar a {
@@ -716,7 +716,7 @@ section.no-bg,
 }
 
 .dark-theme .openbtn {
-    background-color: #611232;
+    background-color: #002768;
 }
 footer .footer-pleca {
 	background-image: url(/public/images/pleca.svg);
@@ -765,7 +765,7 @@ footer .footer-pleca {
     position:static;
     top: 50px;
     left: 10px;
-    background-color: #611232;
+    background-color: #002768;
     padding: 2rem;
     padding-top: 40px;
     border-radius: 8px;
