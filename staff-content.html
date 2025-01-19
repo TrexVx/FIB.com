@@ -25,36 +25,28 @@
         </div>
     
         <button class="openbtn" onclick="toggleNav()">☰</button>
-
-        <!--Parte de links desplegable menu-->
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropdown-button" aria-haspopup="true" aria-expanded="false">Secretarias<span class="arrow-icon"></span>
-            </button>
-            <div id="departamentosDropdown" class="dropdown-content">
-                <a href="seguridad.html" class="saed">Seguridad</a>
-                <a href="salud.html" class="saed">Salud</a>
-                <a href="empleos.html" class="saed">Empleos</a>
-                <a href="turismo.html" class="saed">Turismo</a>
-            </div>
-        </div>
     </header>
 
    <section>
     <div class="container">
         <div id="userInfo"></div>
-        <h1 style="text-align: center;">Foro del FIB</h1>
-        <form id="searchForm">
-            <input type="text" id="searchTerm" placeholder="Buscar publicaciones...">
-            <button class="agregar" type="submit">Buscar</button>
+        <h1>Contenido del Personal</h1>
+        <form id="contentForm">
+            <input type="text" id="contentTitle" placeholder="Título del contenido" required>
+            <textarea id="contentBody" placeholder="Cuerpo del contenido" required></textarea>
+            <select id="contentDepartment" required>
+                <option value="">Seleccione una Division</option>
+                <option value="general">General</option>
+                <option value="seguridad">Seguridad</option>
+                <option value="salud">Salud</option>
+                <option value="educacion">Educación</option>
+                <br>
+            </select>
+            <button class="agregar" type="submit">Publicar Contenido</button>
         </form>
-        <form id="postForm" style="display: none;">
-            <input type="text" id="postTitle" placeholder="Título de la publicación" required>
-            <textarea id="postContent" placeholder="Contenido de la publicación" required></textarea>
-            <input type="url" id="imageUrl" placeholder="URL de la imagen (opcional)">
-            <button type="submit">Publicar</button>
-        </form>
-        <div id="posts"></div>
+        <div id="contentList"></div>
     </div>
+    <br>
    </section>
 
         <section class="news">
@@ -124,6 +116,128 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        function updateUserInfo() {
+            const userInfo = document.getElementById('userInfo');
+            if (currentUser) {
+                userInfo.innerHTML = `
+                    <button class="agregar" onclick="logout()">Cerrar Sesión</button>
+                <h2>Bienvenido, ${currentUser.username} (${currentUser.department})</h2>
+                `;
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        function addContent(title, body, department, author) {
+            const content = JSON.parse(localStorage.getItem('staffContent')) || [];
+            content.unshift({
+                title,
+                body,
+                department,
+                author,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('staffContent', JSON.stringify(content));
+            updateContentList();
+        }
+
+        function updateContentList() {
+            const content = JSON.parse(localStorage.getItem('staffContent')) || [];
+            const contentList = document.getElementById('contentList');
+            contentList.innerHTML = '';
+            content.forEach(item => {
+                if (item.department === currentUser.department || currentUser.department === 'general') {
+                    const contentElement = document.createElement('div');
+                    contentElement.className = 'content-item';
+                    contentElement.innerHTML = `
+                        <h3>${item.title}</h3>
+                        <p>${item.body}</p>
+                        <small>Publicado por: ${item.author} (${item.department}) el ${new Date(item.date).toLocaleString()}</small>
+                    `;
+                    contentList.appendChild(contentElement);
+                }
+            });
+        }
+
+        document.getElementById('contentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('contentTitle').value;
+            const body = document.getElementById('contentBody').value;
+            const department = document.getElementById('contentDepartment').value;
+            addContent(title, body, department, currentUser.username);
+            document.getElementById('contentTitle').value = '';
+            document.getElementById('contentBody').value = '';
+            document.getElementById('contentDepartment').value = '';
+        });
+
+        // Check if the current user is staff
+        if (!currentUser || currentUser.role !== 'staff') {
+            alert('Acceso no autorizado');
+            window.location.href = 'forum.html';
+        } else {
+            updateUserInfo();
+            updateContentList();
+        }
+
+         // Nave
+         let isNavOpen = false;
+
+         function toggleNav() {
+             if (isNavOpen) {
+                 closeNav();
+             } else {
+                 openNav();
+             }
+         }
+ 
+         function openNav() {
+             document.getElementById("mySidebar").style.left = "0";
+             document.getElementById("overlay").style.display = "block";
+             document.getElementById("openbtn").style.left = "250px";
+             isNavOpen = true;
+         }
+ 
+         function closeNav() {
+             document.getElementById("mySidebar").style.left = "-250px";
+             document.getElementById("overlay").style.display = "none";
+             document.getElementById("openbtn").style.left = "0";
+             isNavOpen = false;
+         }
+ 
+         let lastScrollTop = 0;
+         const header = document.getElementById('header');
+         const scrollThreshold = 200;
+ 
+         window.addEventListener('scroll', function() {
+             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+             
+             if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                 header.classList.remove('visible');
+             } else {
+                 header.classList.add('visible');
+             }
+             
+             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+         }, false);
+ 
+         function toggleTheme() {
+             document.body.classList.toggle('dark-theme');
+             localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+         }
+ 
+         document.addEventListener('DOMContentLoaded', (event) => {
+             if (localStorage.getItem('theme') === 'dark') {
+                 document.body.classList.add('dark-theme');
+             }
+         });
+    </script>
 </body>
 </html>

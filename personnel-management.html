@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federal Investigation Bureau</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="public/images/logos/fib_icon.png">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Cambiar tema</button>
+    <header>
+        <nav class="container">
+            <div class="nav-content">
+                <img src="public/images/logos/FIB4.png" alt="" class="logo2">
+                <img src="public/images/logos/FIB-GTAV-Text.webp" alt="" class="logo2">
+            </div>
+        </nav>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="index.html" class="saed">Inicio</a>
+            <a href="forum.html" class="saed">Foro</a>
+            <a href="empleos.html" class="saed">Empleos</a>
+            <a href="noticias.html" class="saed">Noticias</a>
+        </div>
+    
+        <button class="openbtn" onclick="toggleNav()">☰</button>
+
+        <!--Parte de links desplegable menu-->
+        <div class="dropdown">
+            <button onclick="toggleDropdown()" class="dropdown-button" aria-haspopup="true" aria-expanded="false">Direccion<span class="arrow-icon"></span>
+            </button>
+            <div id="departamentosDropdown" class="dropdown-content">
+                <a href="file-management.html" class="saed">Base de Datos</a>
+                <a href="forum.html" class="saed">Foro FIB</a>
+                <a href="staff-content.html" class="saed">Foro Divisiones</a>
+
+            </div>
+        </div>
+    </header>
+    <br>
+   <section>
+    <div class="container4">
+        <h1>Gestión de Personal</h1>
+        <form id="addUserForm">
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <select id="userRole" required>
+                <option value="">Seleccione un rol</option>
+                <option value="staff">Personal</option>
+                <option value="regular">Usuario común</option>
+            </select>
+            <select id="department" style="display: none;">
+                <option value="">Seleccione un departamento</option>
+                <option value="general">General</option>
+                <option value="seguridad">Seguridad</option>
+                <option value="salud">Salud</option>
+                <option value="educacion">Educación</option>
+            </select>
+            <select id="rank" style="display: none;">
+                <option value="">Seleccione un rango</option>
+                <option value="agente">Agente</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="jefe">Jefe</option>
+                <option value="director">Director</option>
+            </select>
+            <button class="agregar" type="submit">Agregar Usuario</button>
+        </form>
+        <h2>Personal</h2>
+        <table id="staffTable">
+            <thead>
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Departamento</th>
+                    <th>Rango</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h2>Usuarios Comunes</h2>
+        <table id="regularTable">
+            <thead>
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h2>Cambio de Rango</h2>
+        <table id="rankChangeTable">
+            <thead>
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Departamento</th>
+                    <th>Rango Actual</th>
+                    <th>Nuevo Rango</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>Cityhall Rockford Hills, Los Santos</p>
+                    <p>Los Santos, SA 12345</p>
+                    <p>Teléfono: S/N</p>
+                    <p>Email: govermentofplomolife@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                        <li><a href="transparencia.html">Transparencia</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <img src="public/images/logos/escudo-icono.png" alt="" class="logo2">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="https://discord.gg/gZGqA6qhEk" aria-label="Discord">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+                            </svg>
+                          </a>
+                          <a href="https://www.youtube.com/@Goverment_PlomoLife" aria-label="YouTube">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                          </a>
+                          <a href="https://x.com/GPlomolife" aria-label="X">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                              </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gobierno de San Andreas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function generatePassword() {
+            return Math.random().toString(36).slice(-8);
+        }
+
+        function addUser(username, role, department = '', rank = '') {
+            const users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            const password = generatePassword();
+            users.push({ username, password, role, department, rank });
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            updateUserTables();
+        }
+
+        function removeUser(username) {
+            let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            users = users.filter(user => user.username !== username);
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            updateUserTables();
+        }
+
+        function editUser(oldUsername, newUsername, newPassword, newDepartment, newRank) {
+            let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            const userIndex = users.findIndex(user => user.username === oldUsername);
+            if (userIndex !== -1) {
+                users[userIndex] = { 
+                    ...users[userIndex],
+                    username: newUsername, 
+                    password: newPassword,
+                    department: newDepartment,
+                    rank: newRank
+                };
+                localStorage.setItem('forumUsers', JSON.stringify(users));
+                updateUserTables();
+            }
+        }
+
+        function updateUserTables() {
+            const users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            const staffTableBody = document.querySelector('#staffTable tbody');
+            const regularTableBody = document.querySelector('#regularTable tbody');
+            const rankChangeTableBody = document.querySelector('#rankChangeTable tbody');
+            
+            staffTableBody.innerHTML = '';
+            regularTableBody.innerHTML = '';
+            rankChangeTableBody.innerHTML = '';
+
+            users.forEach(user => {
+                if (user.username !== 'director') {
+                    const row = document.createElement('tr');
+                    if (user.role === 'staff') {
+                        row.innerHTML = `
+                            <td>${user.username}</td>
+                            <td>${user.password}</td>
+                            <td>${user.department}</td>
+                            <td>${user.rank}</td>
+                            <td>
+                                <button class="action-btn edit-btn" onclick="startEdit('${user.username}')">Editar</button>
+                                <button class="action-btn remove-btn" onclick="removeUser('${user.username}')">Eliminar</button>
+                            </td>
+                        `;
+                        staffTableBody.appendChild(row);
+
+                        const rankChangeRow = document.createElement('tr');
+                        rankChangeRow.innerHTML = `
+                            <td>${user.username}</td>
+                            <td>${user.department}</td>
+                            <td>${user.rank}</td>
+                            <td>
+                                <select id="newRank-${user.username}">
+                                    <option value="agente" ${user.rank === 'agente' ? 'selected' : ''}>Agente</option>
+                                    <option value="supervisor" ${user.rank === 'supervisor' ? 'selected' : ''}>Supervisor</option>
+                                    <option value="jefe" ${user.rank === 'jefe' ? 'selected' : ''}>Jefe</option>
+                                    <option value="director" ${user.rank === 'director' ? 'selected' : ''}>Director</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="action-btn save-btn" onclick="changeRank('${user.username}')">Cambiar Rango</button>
+                            </td>
+                        `;
+                        rankChangeTableBody.appendChild(rankChangeRow);
+                    } else {
+                        row.innerHTML = `
+                            <td>${user.username}</td>
+                            <td>${user.password}</td>
+                            <td>
+                                <button class="action-btn edit-btn" onclick="startEdit('${user.username}')">Editar</button>
+                                <button class="action-btn remove-btn" onclick="removeUser('${user.username}')">Eliminar</button>
+                            </td>
+                        `;
+                        regularTableBody.appendChild(row);
+                    }
+                }
+            });
+        }
+
+        function startEdit(username) {
+            const users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            const user = users.find(u => u.username === username);
+            if (user) {
+                const tables = [document.querySelector('#staffTable tbody'), document.querySelector('#regularTable tbody')];
+                for (let tableBody of tables) {
+                    const rows = tableBody.querySelectorAll('tr');
+                    for (let row of rows) {
+                        if (row.cells[0].textContent === username) {
+                            if (user.role === 'staff') {
+                                row.innerHTML = `
+                                    <td><input type="text" value="${user.username}" id="edit-username-${username}"></td>
+                                    <td><input type="text" value="${user.password}" id="edit-password-${username}"></td>
+                                    <td>
+                                        <select id="edit-department-${username}">
+                                            <option value="general" ${user.department === 'general' ? 'selected' : ''}>General</option>
+                                            <option value="seguridad" ${user.department === 'seguridad' ? 'selected' : ''}>Seguridad</option>
+                                            <option value="salud" ${user.department === 'salud' ? 'selected' : ''}>Salud</option>
+                                            <option value="educacion" ${user.department === 'educacion' ? 'selected' : ''}>Educación</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="edit-rank-${username}">
+                                            <option value="agente" ${user.rank === 'agente' ? 'selected' : ''}>Agente</option>
+                                            <option value="supervisor" ${user.rank === 'supervisor' ? 'selected' : ''}>Supervisor</option>
+                                            <option value="jefe" ${user.rank === 'jefe' ? 'selected' : ''}>Jefe</option>
+                                            <option value="director" ${user.rank === 'director' ? 'selected' : ''}>Director</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="action-btn save-btn" onclick="saveEdit('${username}')">Guardar</button>
+                                        <button class="action-btn cancel-btn" onclick="cancelEdit()">Cancelar</button>
+                                    </td>
+                                `;
+                            } else {
+                                row.innerHTML = `
+                                    <td><input type="text" value="${user.username}" id="edit-username-${username}"></td>
+                                    <td><input type="text" value="${user.password}" id="edit-password-${username}"></td>
+                                    <td>
+                                        <button class="action-btn save-btn" onclick="saveEdit('${username}')">Guardar</button>
+                                        <button class="action-btn cancel-btn" onclick="cancelEdit()">Cancelar</button>
+                                    </td>
+                                `;
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        function saveEdit(oldUsername) {
+            const newUsername = document.getElementById(`edit-username-${oldUsername}`).value;
+            const newPassword = document.getElementById(`edit-password-${oldUsername}`).value;
+            const newDepartment = document.getElementById(`edit-department-${oldUsername}`)?.value || '';
+            const newRank = document.getElementById(`edit-rank-${oldUsername}`)?.value || '';
+            editUser(oldUsername, newUsername, newPassword, newDepartment, newRank);
+        }
+
+        function cancelEdit() {
+            updateUserTables();
+        }
+
+        function changeRank(username) {
+            const newRank = document.getElementById(`newRank-${username}`).value;
+            let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+            const userIndex = users.findIndex(user => user.username === username);
+            if (userIndex !== -1) {
+                users[userIndex].rank = newRank;
+                localStorage.setItem('forumUsers', JSON.stringify(users));
+                updateUserTables();
+            }
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const role = document.getElementById('userRole').value;
+            const department = document.getElementById('department').value;
+            const rank = document.getElementById('rank').value;
+            addUser(username, role, department, rank);
+            document.getElementById('username').value = '';
+            document.getElementById('userRole').value = '';
+            document.getElementById('department').value = '';
+            document.getElementById('rank').value = '';
+            document.getElementById('department').style.display = 'none';
+            document.getElementById('rank').style.display = 'none';
+        });
+
+        document.getElementById('userRole').addEventListener('change', function(e) {
+            const departmentSelect = document.getElementById('department');
+            const rankSelect = document.getElementById('rank');
+            if (e.target.value === 'staff') {
+                departmentSelect.style.display = 'block';
+                rankSelect.style.display = 'block';
+                departmentSelect.required = true;
+                rankSelect.required = true;
+            } else {
+                departmentSelect.style.display = 'none';
+                rankSelect.style.display = 'none';
+                departmentSelect.required = false;
+                rankSelect.required = false;
+            }
+        });
+
+        // Check if the current user is the director
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser || !['jefe', 'director'].includes(currentUser.rank) && currentUser.username !== 'director') {
+            alert('Acceso no autorizado');
+            window.location.href = 'forum.html';
+        } else {
+            updateUserTables();
+        }
+        
+        // Nave
+        let isNavOpen = false;
+
+        function toggleNav() {
+            if (isNavOpen) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("openbtn").style.left = "250px";
+            isNavOpen = true;
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-250px";
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("openbtn").style.left = "0";
+            isNavOpen = false;
+        }
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        const scrollThreshold = 200;
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                header.classList.remove('visible');
+            } else {
+                header.classList.add('visible');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        });
+        function toggleDropdown() {
+            const button = document.querySelector('.dropdown-button');
+            const dropdownContent = document.getElementById("departamentosDropdown");
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            button.setAttribute('aria-expanded', !isExpanded);
+            dropdownContent.classList.toggle("show");
+        }
+        
+        // Cerrar el dropdown si el usuario hace clic fuera de él
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-button') && !event.target.matches('.arrow-icon')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                const buttons = document.getElementsByClassName("dropdown-button");
+                
+                for (let i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                        buttons[i].setAttribute('aria-expanded', 'false');
+                    }
+                }
+            }
+        }
+        // Función para manejar el desplazamiento suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+        
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const jobSearchForm = document.getElementById('job-search-form');
+            const jobKeywordInput = document.getElementById('job-keyword');
+            const jobDepartmentSelect = document.getElementById('job-department');
+            const jobList = document.getElementById('job-list');
+        
+            if (jobSearchForm) {
+                jobSearchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const keyword = jobKeywordInput.value.toLowerCase();
+                    const department = jobDepartmentSelect.value.toLowerCase();
+        
+                    const jobItems = jobList.querySelectorAll('.job-item');
+                    jobItems.forEach(function(item) {
+                        const title = item.querySelector('h3').textContent.toLowerCase();
+                        const description = item.querySelector('.job-description').textContent.toLowerCase();
+                        const itemDepartment = item.dataset.department.toLowerCase();
+        
+                        const keywordMatch = title.includes(keyword) || description.includes(keyword);
+                        const departmentMatch = department === '' || itemDepartment === department;
+        
+                        if (keywordMatch && departmentMatch) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

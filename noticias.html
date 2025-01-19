@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias - Gobierno de San Andreas</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="nav-content">
-                <img src="public/images/logos/SASeal.png" alt="" class="logo2">
-                <a href="index.html" class="logo">San Andreas</a>
-                <ul class="nav-links">
-                    <li><a href="seguridad.html">Seguridad</a></li>
-                    <li><a href="salud.html">Salud</a></li>
-                    <li><a href="empleos.html">Empleos</a></li>
-                    <li><a href="turismo.html">Turismo</a></li>
-                </ul>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FIB - Noticias</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="public/images/logos/fib_icon.png">
+    </head>
+    <body>
+        <button class="theme-toggle" onclick="toggleTheme()">Cambiar tema</button>
+        <header>
+            <nav class="container">
+                <div class="nav-content">
+                    <img src="public/images/logos/FIB4.png" alt="" class="logo2">
+                    <img src="public/images/logos/FIB-GTAV-Text.webp" alt="" class="logo2">
+                </div>
+            </nav>
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="index.html" class="saed">Inicio</a>
+                <a href="forum.html" class="saed">Foro</a>
+                <a href="empleos.html" class="saed">Empleos</a>
+                <a href="noticias.html" class="saed">Noticias</a>
             </div>
-        </nav>
-    </header>
+        
+            <button class="openbtn" onclick="toggleNav()">☰</button>
+    
+        </header>
 
     <main class="container">
         <section class="hero">

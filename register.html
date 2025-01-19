@@ -151,6 +151,56 @@
             alert('Registro exitoso. Por favor, inicia sesión.');
             window.location.href = 'login.html';
         });
+        let isNavOpen = false;
+
+        function toggleNav() {
+            if (isNavOpen) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("openbtn").style.left = "250px";
+            isNavOpen = true;
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-250px";
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("openbtn").style.left = "0";
+            isNavOpen = false;
+        }
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        const scrollThreshold = 200;
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                header.classList.remove('visible');
+            } else {
+                header.classList.add('visible');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        });
     </script>
 </body>
 </html>

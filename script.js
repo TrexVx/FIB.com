@@ -284,15 +284,19 @@ function toggleTheme() {
             const userInfo = document.getElementById('userInfo');
             const postForm = document.getElementById('postForm');
             if (currentUser) {
+                let extraLinks = '';
+                if (currentUser.username === 'director') {
+                    extraLinks = ' | <a href="personnel-management.html">Gestión de Personal</a>';
+                }
                 userInfo.innerHTML = `
-                    <h3>Bienvenido, ${currentUser.username}!</h3>
-                    <button id="logoutButton">Cerrar Sesión</button>
+                    <button class="agregar" id="logoutButton">Cerrar Sesión</button>${extraLinks}
+                    <h2> Bienvenido, ${currentUser.username}!</h2>
                 `;
                 document.getElementById('logoutButton').addEventListener('click', logout);
                 postForm.style.display = 'block';
             } else {
                 userInfo.innerHTML = `
-                    <button class="enviar" id="loginButton">Iniciar Sesión</button>
+                    <button class="agregar" id="loginButton">Iniciar Sesión</button>
                 `;
                 document.getElementById('loginButton').addEventListener('click', () => {
                     window.location.href = 'login.html';
@@ -316,7 +320,7 @@ function toggleTheme() {
         function displayPosts(posts) {
             const postsContainer = document.getElementById('posts');
             postsContainer.innerHTML = '';
-            posts.forEach(post => {
+            posts.forEach((post, index) => {
                 const postElement = document.createElement('div');
                 postElement.className = 'post';
                 postElement.innerHTML = `
@@ -324,9 +328,28 @@ function toggleTheme() {
                     <p>${post.content}</p>
                     ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Imagen de la publicación">` : ''}
                     <div class="meta">Publicado por: ${post.author} el ${new Date(post.date).toLocaleString()}</div>
+                    ${currentUser && currentUser.username === 'director' ? 
+                        `<button class="deleteButton" data-index="${index}">Eliminar</button>` : ''}
                 `;
                 postsContainer.appendChild(postElement);
             });
+
+            // Add event listeners for delete buttons
+            if (currentUser && currentUser.username === 'director') {
+                document.querySelectorAll('.deleteButton').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        deletePost(index);
+                    });
+                });
+            }
+        }
+
+        function deletePost(index) {
+            const posts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+            posts.splice(index, 1);
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+            loadPosts();
         }
 
         function savePost(title, content, imageUrl) {
@@ -372,6 +395,7 @@ function toggleTheme() {
 
         updateUserInfo();
         loadPosts();
+        
 
          //Login y register
         /* document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -410,3 +434,6 @@ function toggleTheme() {
             alert('Registro exitoso. Por favor, inicia sesión.');
             window.location.href = 'login.html';
         });*/
+
+        
+        

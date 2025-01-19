@@ -16,61 +16,39 @@
                 <img src="public/images/logos/FIB-GTAV-Text.webp" alt="" class="logo2">
             </div>
         </nav>
-        <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="index.html" class="saed">Inicio</a>
-            <a href="forum.html" class="saed">Foro</a>
-            <a href="empleos.html" class="saed">Empleos</a>
-            <a href="noticias.html" class="saed">Noticias</a>
-        </div>
-    
-        <button class="openbtn" onclick="toggleNav()">☰</button>
-
-        <!--Parte de links desplegable menu-->
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropdown-button" aria-haspopup="true" aria-expanded="false">Secretarias<span class="arrow-icon"></span>
-            </button>
-            <div id="departamentosDropdown" class="dropdown-content">
-                <a href="seguridad.html" class="saed">Seguridad</a>
-                <a href="salud.html" class="saed">Salud</a>
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="index.html" class="saed">Inicio</a>
+                <a href="forum.html" class="saed">Foro</a>
                 <a href="empleos.html" class="saed">Empleos</a>
-                <a href="turismo.html" class="saed">Turismo</a>
+                <a href="noticias.html" class="saed">Noticias</a>
             </div>
-        </div>
+        
+            <button class="openbtn" onclick="toggleNav()">☰</button>
     </header>
-
+    <br>
    <section>
-    <div class="container">
-        <div id="userInfo"></div>
-        <h1 style="text-align: center;">Foro del FIB</h1>
-        <form id="searchForm">
-            <input type="text" id="searchTerm" placeholder="Buscar publicaciones...">
-            <button class="agregar" type="submit">Buscar</button>
+    <div class="container4">
+        <h1>Gestión de Archivos</h1>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" required>
+            <input type="text" id="fileDescription" placeholder="Descripción del archivo" required>
+            <button class="agregar" type="submit">Subir Archivo</button>
+            
         </form>
-        <form id="postForm" style="display: none;">
-            <input type="text" id="postTitle" placeholder="Título de la publicación" required>
-            <textarea id="postContent" placeholder="Contenido de la publicación" required></textarea>
-            <input type="url" id="imageUrl" placeholder="URL de la imagen (opcional)">
-            <button type="submit">Publicar</button>
-        </form>
-        <div id="posts"></div>
-    </div>
-   </section>
-
-        <section class="news">
-            <h2>Noticias y Eventos</h2>
-            <ul>
-                <li>
-                    <h3></h3>
-                    <p></p>
-                </li>
-                <li>
-                    <h3></h3>
-                    <p></p>
-                </li>
-            </ul>
-            <a href="noticias.html" class="button">Ver todas las noticias</a>
-        </section>
+        <h2>Archivos Subidos</h2>
+        <table id="fileTable">
+            <thead>
+                <tr>
+                    <th>Nombre del Archivo</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Subida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
     </main>
 
     <footer>
@@ -124,6 +102,133 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        function uploadFile(file, description) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const fileContent = event.target.result;
+                    const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                    files.push({
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        content: fileContent,
+                        description: description,
+                        uploadDate: new Date().toISOString()
+                    });
+                    localStorage.setItem('uploadedFiles', JSON.stringify(files));
+                    resolve();
+                };
+                reader.onerror = function(error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeFile(fileName) {
+            let files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            files = files.filter(file => file.name !== fileName);
+            localStorage.setItem('uploadedFiles', JSON.stringify(files));
+            updateFileTable();
+        }
+
+        function updateFileTable() {
+            const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            const tableBody = document.querySelector('#fileTable tbody');
+            tableBody.innerHTML = '';
+            files.forEach(file => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td><a href="${file.content}" download="${file.name}" class="file-link">${file.name}</a></td>
+                    <td>${file.description}</td>
+                    <td>${new Date(file.uploadDate).toLocaleString()}</td>
+                    <td>
+                        <button class="remove-btn" onclick="removeFile('${file.name}')">Eliminar</button>
+                    </td>
+                `;
+            });
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const fileDescription = document.getElementById('fileDescription').value;
+            const file = fileInput.files[0];
+            if (file) {
+                try {
+                    await uploadFile(file, fileDescription);
+                    updateFileTable();
+                    fileInput.value = '';
+                    document.getElementById('fileDescription').value = '';
+                } catch (error) {
+                    console.error('Error uploading file:', error);
+                    alert('Error al subir el archivo. Por favor, inténtelo de nuevo.');
+                }
+            }
+        });
+
+        // Check if the current user is a high-ranking official
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser || !['jefe', 'director'].includes(currentUser.rank) && currentUser.username !== 'director') {
+            alert('Acceso no autorizado');
+            window.location.href = 'forum.html';
+        } else {
+            updateUserTables();
+        }
+        
+        // Nave
+        let isNavOpen = false;
+
+        function toggleNav() {
+            if (isNavOpen) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("openbtn").style.left = "250px";
+            isNavOpen = true;
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-250px";
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("openbtn").style.left = "0";
+            isNavOpen = false;
+        }
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        const scrollThreshold = 200;
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                header.classList.remove('visible');
+            } else {
+                header.classList.add('visible');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        });
+    </script>
 </body>
 </html>
