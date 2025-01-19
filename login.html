@@ -94,9 +94,9 @@
         // Initialize the director account if it doesn't exist
         function initializeDirector() {
             const users = JSON.parse(localStorage.getItem('forumUsers')) || [];
-            if (!users.some(user => user.username === 'director')) {
+            if (!users.some(user => user.username === 'Direccion')) {
                 users.push({ 
-                    username: 'director', 
+                    username: 'Direccion', 
                     password: 'admin123', 
                     role: 'staff', 
                     department: 'general' 
