@@ -71,7 +71,7 @@
                 <tr>
                     <th>Nombre de Usuario</th>
                     <th>Contraseña</th>
-                    <th>Departamento</th>
+                    <th>Division</th>
                     <th>Rango</th>
                     <th>Acciones</th>
                 </tr>
@@ -94,7 +94,7 @@
             <thead>
                 <tr>
                     <th>Nombre de Usuario</th>
-                    <th>Departamento</th>
+                    <th>Division</th>
                     <th>Rango Actual</th>
                     <th>Nuevo Rango</th>
                     <th>Acción</th>
@@ -267,7 +267,7 @@
                                     <td><input type="text" value="${user.password}" id="edit-password-${username}"></td>
                                     <td>
                                         <select id="edit-department-${username}">
-                                            <option value="general" ${user.department === 'general' ? 'selected' : ''}>General</option>
+                                            <option value="general" ${user.department === 'general' ? 'selected' : ''}>ERT</option>
                                             <option value="seguridad" ${user.department === 'seguridad' ? 'selected' : ''}>Seguridad</option>
                                             <option value="salud" ${user.department === 'salud' ? 'selected' : ''}>Salud</option>
                                             <option value="educacion" ${user.department === 'educacion' ? 'selected' : ''}>Educación</option>

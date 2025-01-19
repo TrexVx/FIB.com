@@ -933,7 +933,7 @@ input, textarea {
     border-radius: 4px;
 }
 #postForm button, #searchForm button, #logoutButton, #loginButton, .deleteButton {
-    background-color: #4CAF50;
+    background-color: #2f37c7;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -941,7 +941,7 @@ input, textarea {
     cursor: pointer;
 }
 #postForm button:hover, #searchForm button:hover, #logoutButton:hover, #loginButton:hover, .deleteButton:hover {
-    background-color: #45a049;
+    background-color: #2f37c7;
 }
 .deleteButton {
     background-color: #f44336;
@@ -1058,10 +1058,10 @@ th {
     background-color: #d32f2f;
 }
 .save-btn {
-    background-color: #4CAF50;
+    background-color: #2f37c7;
 }
 .save-btn:hover {
-    background-color: #45a049;
+    background-color: #2f37c7;
 }
 .cancel-btn {
     background-color: #607D8B;
