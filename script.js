@@ -285,7 +285,7 @@ function toggleTheme() {
             const postForm = document.getElementById('postForm');
             if (currentUser) {
                 let extraLinks = '';
-                if (currentUser.username === 'director') {
+                if (currentUser.username === 'Direccion') {
                     extraLinks = ' | <a href="personnel-management.html">Gestión de Personal</a>';
                 }
                 userInfo.innerHTML = `
@@ -335,7 +335,7 @@ function toggleTheme() {
             });
 
             // Add event listeners for delete buttons
-            if (currentUser && currentUser.username === 'director') {
+            if (currentUser && currentUser.username === 'Direccion') {
                 document.querySelectorAll('.deleteButton').forEach(button => {
                     button.addEventListener('click', function() {
                         const index = this.getAttribute('data-index');
