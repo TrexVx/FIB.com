@@ -359,7 +359,7 @@
 
         // Check if the current user is the director
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (!currentUser || !['jefe', 'director'].includes(currentUser.rank) && currentUser.username !== 'director') {
+        if (!currentUser || !['jefe', 'director'].includes(currentUser.rank) && currentUser.username !== 'Direccion') {
             alert('Acceso no autorizado');
             window.location.href = 'forum.html';
         } else {
