@@ -1,0 +1,26 @@
+.Header {
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  top: -10px;
+  transition: top 0.3s;
+  z-index: 1000;
+  text-align: center;
+  left: 0;
+  background-color: #002768;
+}
+.Header h1 {
+  font-size: 30px;
+  color: #ffe600;
+}
+.Header nav {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  a {
+    color: var(--text);
+    text-decoration: underline;
+  }
+}
