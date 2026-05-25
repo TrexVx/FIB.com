@@ -1,15 +1,21 @@
-import { StrictMode } from 'react'
+import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Header from './widgets/Header'
+import Header from './widgets/Header.tsx'
 import App from './App.tsx'
 import Footer from './widgets/Footer'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Header />
-    <App />
-    <Footer />
-  </StrictMode>,
-)
+function Root() {
+  const [actualTab, setActualTab] = useState<any>(null)
+
+  return (
+    <StrictMode>
+      <Header actualTab={actualTab} onTabChange={setActualTab} />
+      <App />
+      <Footer />
+    </StrictMode>
+  )
+}
+
+createRoot(document.getElementById('root')!).render(<Root />)
 

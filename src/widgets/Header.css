@@ -1,26 +1,141 @@
 .Header {
-  padding: 15px;
-  position: fixed;
-  width: 100%;
-  top: -10px;
-  transition: top 0.3s;
-  z-index: 1000;
-  text-align: left;
-  left: 0;
+  position: fixed; /* Hace que el header se quede congelado en la pantalla */
+  top: 0;          /* Lo alinea al borde superior exacto */
+  left: 0;         /* Lo alinea al borde izquierdo exacto */
+  width: 100%;     /* Asegura que cubra todo el ancho de la pantalla */
+  box-sizing: border-box; /* Evita que el padding extra rompa el ancho del 100% */
+  
   background-color: #002768;
-}
-.Header h1 {
-  font-size: 30px;
-  color: #ffe600;
-}
-.Header nav {
-  margin-top: 10px;
+  border-bottom: 2px solid #232931;
+  padding: 15px 30px;
   display: flex;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  
+  z-index: 1000; /* Asegura que siempre flote por encima de las tarjetas de noticias */
+}
 
-  a {
-    color: var(--text);
-    text-decoration: underline;
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-mini-logo {
+  height: 40px ;
+  width: auto;
+}
+
+.Header h1 {
+  font-size: 25px;
+  font-family: "Arial Black", Gadget, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c5a059; /* Dorado institucional */
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Lista de navegación para pantallas grandes */
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #e3e6eb;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: color 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: #c5a059;
+  font-weight: 600;
+}
+
+/* Ocultar el botón de hamburguesa en computadoras */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: #e3e6eb00;
+  transition: all 0.3s ease;
+}
+
+/* --- DISEÑO RESPONSIVO (MÓVILES) --- */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Animación del botón de hamburguesa al transformarse en 'X' */
+  .hamburger-btn.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+    background-color: #c5a059;
+  }
+
+  .hamburger-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-btn.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6deg);
+    background-color: #c5a059;
+  }
+
+  /* Menú desplegable móvil */
+  .nav-menu {
+    position: fixed; /* Cambiado de absolute a fixed para que acompañe al header fijo */
+    top: 68px;       /* Colócalo exactamente debajo de la barra del Header */
+    left: 0;
+    right: 0;
+    background-color: #111418;
+    border-bottom: 2px solid #232931;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .nav-menu.active {
+    max-height: 350px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 15px;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
   }
 }
