@@ -1,4 +1,4 @@
-/* Variables de Diseño Institucional */
+
 :root {
   --bg-main: #f8f9fa;
   --bg-dark-portal: #010204;
@@ -88,9 +88,10 @@ body {
   font-size: 18px;
   font-family: 'Lora' !important;
   font-style: italic;
-  color: #a0aec0;
+  color: #f9fcff;
   line-height: 1.5;
   margin: 0;
+  
 }
 
 .portal-main {
